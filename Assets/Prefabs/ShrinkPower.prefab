@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6515f8b0500590489d58574e3150afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallPlayer: {fileID: 21300000, guid: 0800b3d40b54c954fa365702df490919, type: 3}
+  buffDuration: 10
+  sizeMultiplier: 0.5
 --- !u!114 &7533129757406657491
 MonoBehaviour:
   m_ObjectHideFlags: 0

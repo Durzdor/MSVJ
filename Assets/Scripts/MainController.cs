@@ -6,28 +6,42 @@ public class MainController : MonoBehaviour
 {
     private Vector3 direction;
     [SerializeField] private float speed = 10f;
-    [SerializeField] private int lives = 3;
-    public bool small;
-    public bool normal;
-    public bool large;
-    private CapsuleCollider2D capsuleCollider2D;
-    private Vector2 normalSize;
-    [SerializeField] private float sizeDuration;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite normalSprite;
+    public bool smallPowerOn;
+    public float smallPowerDuration;
+    public bool largePowerOn;
+    public float largePowerDuration;
     private Rigidbody2D rb2D;
 
     private void Awake()
     {
-        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        normalSize = new Vector2(0.97f, 0.256f);
         rb2D = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         Movement();
+        //lo que pasa si esta ShrinkPowerup
+        if (smallPowerOn)
+        {
+            smallPowerDuration -= Time.deltaTime;
+
+            if (smallPowerDuration <= 0)
+            {
+                smallPowerOn = false;
+                GameManager.Instance.NormalPlayer();
+            }
+        }
+        //lo que pasa si esta EnlargePowerup
+        if (largePowerOn)
+        {
+            largePowerDuration -= Time.deltaTime;
+
+            if (largePowerDuration <= 0)
+            {
+                largePowerOn = false;
+                GameManager.Instance.NormalPlayer();
+            }
+        }
     }
     private void FixedUpdate()
     {
@@ -39,19 +53,14 @@ public class MainController : MonoBehaviour
     {
         direction = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
     }
-    
-    //Timer para volver a tamaño normal
-    public void Resize()
+    //propiedades de ShrinkPowerup
+    public void ShrinkPlayerReset(float buffDuration)
     {
-        Invoke("NormalSize", sizeDuration);
+        smallPowerDuration = buffDuration;
     }
-   
-    //Cambio el tamaño a normal y pongo las variables en falso
-    private void NormalSize()
+    //propiedades de EnlargePowerup
+    public void EnlargePlayerReset(float buffDuration)
     {
-        capsuleCollider2D.size = normalSize;
-        spriteRenderer.sprite = normalSprite;
-        small = false;
-        large = false;
+        largePowerDuration = buffDuration;
     }
 }

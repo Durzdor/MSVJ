@@ -12,25 +12,26 @@ public class BallBehaviour : MonoBehaviour
     private Vector2 collisionNormal;
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRenderer;
-    private CircleCollider2D circleCollider2D;
     public bool slowBallOn;
     public float slowBallDuration;
     public bool fastBallOn;
     public float fastBallDuration;
     public bool damageBallOn;
     public float damageBallDuration;
+    public int damageBallPower;
     public bool cannonBallOn;
     public float cannonBallDuration;
+    public int cannonBallPower;
 
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        circleCollider2D = GetComponent<CircleCollider2D>();
     }
 
     private void Update()
     {
+        //Lo que pasa si tengo el FastPowerup
         if (fastBallOn)
         {
             fastBallDuration -= Time.deltaTime;
@@ -40,6 +41,7 @@ public class BallBehaviour : MonoBehaviour
                 fastBallOn = false;
             }
         }
+        //Lo que pasa si tengo el SlowPowerup
         if (slowBallOn)
         {
             slowBallDuration -= Time.deltaTime;
@@ -49,27 +51,28 @@ public class BallBehaviour : MonoBehaviour
                 slowBallOn = false;
             }
         }
+        //Lo que pasa si tengo el DamagePowerup
         if (damageBallOn)
         {
             damageBallDuration -= Time.deltaTime;
+            spriteRenderer.color = Color.red;
             if (damageBallDuration <= 0)
             {
-                dmg = baseDmg;
+                dmg -= damageBallPower;
                 damageBallOn = false;
                 spriteRenderer.color = Color.white;
             }
         }
+        //Lo que pasa si tengo el CannonPowerup
         if (cannonBallOn)
         {
             cannonBallDuration -= Time.deltaTime;
-            circleCollider2D.enabled = true;
-
+            spriteRenderer.color = Color.green;
             if (cannonBallDuration <= 0)
             {
-                dmg = baseDmg;
+                dmg -= cannonBallPower;
                 cannonBallOn = false;
                 spriteRenderer.color = Color.white;
-                circleCollider2D.enabled = false;
             }
         }
     }
@@ -78,21 +81,11 @@ public class BallBehaviour : MonoBehaviour
         rb2D.velocity = direction * speed;
     }
 
-    //Cuando colisiona se fija la normal del objeto colisionado
     //Hace un reflejo para conseguir nueva direccion
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collisionNormal = collision.contacts[0].normal;
         direction = Vector2.Reflect(direction, collisionNormal);
-    }
-
-    //CannonBall Triggers
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Block"))
-        {
-            Destroy(collision.gameObject);
-        }
     }
 
     //pone la duracion del buff de Fastball
@@ -108,14 +101,16 @@ public class BallBehaviour : MonoBehaviour
     }
 
     //pone la duracion del buff de DamageBall
-    public void DamageBallDmgReset(float buffDuration)
+    public void DamageBallDmgReset(float buffDuration, int buffPower)
     {
         damageBallDuration = buffDuration;
+        damageBallPower = buffPower;
     }
 
     //pone la duracion del buff de CannonBall
-    public void CannonBallDmgReset(float buffDuration)
+    public void CannonBallDmgReset(float buffDuration, int buffPower)
     {
         cannonBallDuration = buffDuration;
+        cannonBallPower = buffPower;
     }
 }
