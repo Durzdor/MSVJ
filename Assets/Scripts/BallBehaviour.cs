@@ -58,8 +58,8 @@ public class BallBehaviour : MonoBehaviour
             spriteRenderer.color = Color.red;
             if (damageBallDuration <= 0)
             {
-                dmg -= damageBallPower;
                 damageBallOn = false;
+                dmg -= damageBallPower;
                 spriteRenderer.color = Color.white;
             }
         }
@@ -70,10 +70,11 @@ public class BallBehaviour : MonoBehaviour
             spriteRenderer.color = Color.green;
             if (cannonBallDuration <= 0)
             {
-                dmg -= cannonBallPower;
                 cannonBallOn = false;
+                dmg -= cannonBallPower - 1;
                 spriteRenderer.color = Color.white;
             }
+            
         }
     }
     private void FixedUpdate()

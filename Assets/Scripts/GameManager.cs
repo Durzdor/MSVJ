@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite smallPlayer;
     [SerializeField] Sprite normalPlayer;
     [SerializeField] Sprite largePlayer;
-    private float playerSize;
+    private float playerSize = 1f;
     private float defaultSizeMultiplier = 1f;
     
     //Singleton
@@ -101,17 +101,17 @@ public class GameManager : MonoBehaviour
         playerSpriteRenderer.sprite = smallPlayer;
         playerCapsuleCollider2D.size = new Vector2(0.46f, 0.256f);
         playerMainController.smallPowerOn = true;
-        playerMainController.ShrinkPlayerReset(buffDuration);
+        playerMainController.ShrinkPlayerReset(buffDuration, sizeMultiplier);
         playerSize = sizeMultiplier;
     }
 
     //tamaño normal de player
-    public void NormalPlayer()
+    public void NormalPlayer(float sizeMultiplier)
     {
         playerSpriteRenderer.sprite = normalPlayer;
         playerCapsuleCollider2D.size = new Vector2(0.97f, 0.256f);
         //playerMainController.normalPowerOn = true;
-        playerSize = defaultSizeMultiplier;
+        playerSize -= sizeMultiplier;
     }
     //propiedades de EnlargePowerup
     public void EnlargePlayer(float buffDuration, float sizeMultiplier)
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
         playerSpriteRenderer.sprite = largePlayer;
         playerCapsuleCollider2D.size = new Vector2(1.386f, 0.256f);
         playerMainController.largePowerOn = true;
-        playerMainController.EnlargePlayerReset(buffDuration);
+        playerMainController.EnlargePlayerReset(buffDuration, sizeMultiplier);
         playerSize = sizeMultiplier;
     }
 }

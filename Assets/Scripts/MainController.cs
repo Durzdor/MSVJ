@@ -8,8 +8,10 @@ public class MainController : MonoBehaviour
     [SerializeField] private float speed = 10f;
     public bool smallPowerOn;
     public float smallPowerDuration;
+    public float smallPowerMultiplier;
     public bool largePowerOn;
     public float largePowerDuration;
+    public float largePowerMultiplier;
     private Rigidbody2D rb2D;
 
     private void Awake()
@@ -28,7 +30,7 @@ public class MainController : MonoBehaviour
             if (smallPowerDuration <= 0)
             {
                 smallPowerOn = false;
-                GameManager.Instance.NormalPlayer();
+                GameManager.Instance.NormalPlayer(smallPowerMultiplier);
             }
         }
         //lo que pasa si esta EnlargePowerup
@@ -39,7 +41,7 @@ public class MainController : MonoBehaviour
             if (largePowerDuration <= 0)
             {
                 largePowerOn = false;
-                GameManager.Instance.NormalPlayer();
+                GameManager.Instance.NormalPlayer(largePowerMultiplier);
             }
         }
     }
@@ -54,13 +56,15 @@ public class MainController : MonoBehaviour
         direction = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
     }
     //propiedades de ShrinkPowerup
-    public void ShrinkPlayerReset(float buffDuration)
+    public void ShrinkPlayerReset(float buffDuration, float sizeMultiplier)
     {
         smallPowerDuration = buffDuration;
+        smallPowerMultiplier = sizeMultiplier;
     }
     //propiedades de EnlargePowerup
-    public void EnlargePlayerReset(float buffDuration)
+    public void EnlargePlayerReset(float buffDuration, float sizeMultiplier)
     {
         largePowerDuration = buffDuration;
+        largePowerMultiplier = sizeMultiplier;
     }
 }
