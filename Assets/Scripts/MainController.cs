@@ -7,14 +7,17 @@ public class MainController : MonoBehaviour
     #region Variables
     private Vector3 direction;
     [SerializeField] private float speed = 10f;
-    public bool smallPowerOn;
-    public float smallPowerDuration;
-    public float smallPowerMultiplier;
-    public bool largePowerOn;
-    public float largePowerDuration;
-    public float largePowerMultiplier;
+    [HideInInspector] public bool smallPowerOn;
+    [HideInInspector] public float smallPowerDuration;
+    [HideInInspector] public float smallPowerMultiplier;
+    [HideInInspector] public bool largePowerOn;
+    [HideInInspector] public float largePowerDuration;
+    [HideInInspector] public float largePowerMultiplier;
     private Rigidbody2D rb2D;
+    [HideInInspector] public bool magnetPowerOn;
+    [HideInInspector] public float magnetPowerDuration;
     #endregion
+
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -44,12 +47,31 @@ public class MainController : MonoBehaviour
                 GameManager.Instance.NormalPlayer(largePowerMultiplier);
             }
         }
+        //lo que pasa si esta MagnetPowerup
+        if (magnetPowerOn)
+        {
+            magnetPowerDuration -= Time.deltaTime;
+
+            if (magnetPowerDuration <= 0)
+            {
+                magnetPowerOn = false;
+            }
+        }
     }
     private void FixedUpdate()
     {
         rb2D.velocity = direction * speed;
     }
-
+    //Magnet Collision
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ball") && magnetPowerOn)
+        {
+            Vector2 freeze = Vector2.zero;
+            //collision.gameObject.GetComponent<Rigidbody2D>().velocity = freeze;
+            collision.gameObject.GetComponent<BallBehaviour>().direction = freeze;
+        }
+    }
     //Movimiento
     private void Movement()
     {
@@ -66,5 +88,10 @@ public class MainController : MonoBehaviour
     {
         largePowerDuration = buffDuration;
         largePowerMultiplier = sizeMultiplier;
+    }
+    //propiedades de MagnetPowerup
+    public void MagnetPlayerReset(float buffDuration)
+    {
+        magnetPowerDuration = buffDuration;
     }
 }

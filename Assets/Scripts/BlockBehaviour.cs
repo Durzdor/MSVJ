@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BlockBehaviour : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private int hitpoints;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
     private int currentSprite;
-
+    #endregion
+    
     //Guarda su componente SpriteRenderer y pone su sprite de acuerdo a su vida
     private void Awake()
     {

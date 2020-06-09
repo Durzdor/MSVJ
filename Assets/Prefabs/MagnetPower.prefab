@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7839734534142701802}
   - component: {fileID: 7839734534142701800}
+  - component: {fileID: 5871662597316189925}
   - component: {fileID: 7839734534142701803}
   - component: {fileID: 2879808511638603465}
   m_Layer: 9
@@ -45,8 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8caee78287d86114fab977230f89749e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
-  destroytimer: 20
+  speed: 1
+--- !u!114 &5871662597316189925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7839734534142701805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1abe62416d42e24cb0896480566928d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffDuration: 15
 --- !u!212 &7839734534142701803
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -11,24 +11,25 @@ public class BallBehaviour : MonoBehaviour
     private Vector2 collisionNormal;
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRenderer;
-    public bool slowBallOn;
-    public float slowBallDuration;
-    public float slowBallMultiplier;
-    public bool fastBallOn;
-    public float fastBallDuration;
-    public float fastBallMultiplier;
-    public bool damageBallOn;
-    public float damageBallDuration;
-    public int damageBallPower;
-    public bool cannonBallOn;
-    public float cannonBallDuration;
-    public int cannonBallPower;
+    [HideInInspector] public bool slowBallOn;
+    [HideInInspector] public float slowBallDuration;
+    [HideInInspector] public float slowBallMultiplier;
+    [HideInInspector] public bool fastBallOn;
+    [HideInInspector] public float fastBallDuration;
+    [HideInInspector] public float fastBallMultiplier;
+    [HideInInspector] public bool damageBallOn;
+    [HideInInspector] public float damageBallDuration;
+    [HideInInspector] public int damageBallPower;
+    [HideInInspector] public bool cannonBallOn;
+    [HideInInspector] public float cannonBallDuration;
+    [HideInInspector] public int cannonBallPower;
     #endregion
 
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        GameManager.Instance.BallAdd(this);
     }
     private void Update()
     {
@@ -80,7 +81,7 @@ public class BallBehaviour : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb2D.velocity = direction * speed;
+        rb2D.velocity = direction * speed;  
     }
     //Hace un reflejo para conseguir nueva direccion
     private void OnCollisionEnter2D(Collision2D collision)
@@ -116,5 +117,7 @@ public class BallBehaviour : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.Instance.LifeCounter();
+        GameManager.Instance.BallRemover(this);
     }
+    
 }
