@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Variables
     public bool dontDestroyOnLoad;
     public static GameManager Instance;
     public static float score;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite largePlayer;
     private float playerSize = 1f;
     private float defaultSizeMultiplier = 1f;
-    
+    #endregion
     //Singleton
     private void Awake()
     {
@@ -55,17 +56,17 @@ public class GameManager : MonoBehaviour
     //propiedades de FastPowerup
     public void FastBall(float speedMultiplier, float buffDuration)
     {
-        ballBehaviour.speed *= speedMultiplier;
+        ballBehaviour.speed += speedMultiplier;
         ballBehaviour.fastBallOn = true;
-        ballBehaviour.FastBallSpeedReset(buffDuration);      
+        ballBehaviour.FastBallSpeedReset(buffDuration, speedMultiplier);      
     }
    
     //propiedades de SlowPowerup
     public void SlowBall(float speedMultiplier, float buffDuration)
     {
-        ballBehaviour.speed /= speedMultiplier;
+        ballBehaviour.speed -= speedMultiplier;
         ballBehaviour.slowBallOn = true;
-        ballBehaviour.SlowBallSpeedReset(buffDuration);       
+        ballBehaviour.SlowBallSpeedReset(buffDuration, speedMultiplier);       
     }
 
     //propiedades de DamagePowerup

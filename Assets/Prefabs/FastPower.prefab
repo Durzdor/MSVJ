@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb105a144abe674f825280eb7551ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 2
+  speedMultiplier: 5
   buffDuration: 10
 --- !u!212 &5723105484426847339
 SpriteRenderer:

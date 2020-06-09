@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class BallBehaviour : MonoBehaviour
 {
+    #region Variables
     private Vector3 direction = Vector3.down;
     public float speed;
-    [SerializeField] private float normalSpeed;
     public int dmg;
-    [SerializeField] private int baseDmg;
     private Vector2 collisionNormal;
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRenderer;
     public bool slowBallOn;
     public float slowBallDuration;
+    public float slowBallMultiplier;
     public bool fastBallOn;
     public float fastBallDuration;
+    public float fastBallMultiplier;
     public bool damageBallOn;
     public float damageBallDuration;
     public int damageBallPower;
     public bool cannonBallOn;
     public float cannonBallDuration;
     public int cannonBallPower;
+    #endregion
 
     private void Awake()
     {
@@ -37,7 +39,7 @@ public class BallBehaviour : MonoBehaviour
             fastBallDuration -= Time.deltaTime;
             if (fastBallDuration <= 0)
             {
-                speed = normalSpeed;
+                speed -= fastBallMultiplier;
                 fastBallOn = false;
             }
         }
@@ -47,7 +49,7 @@ public class BallBehaviour : MonoBehaviour
             slowBallDuration -= Time.deltaTime;
             if (slowBallDuration <= 0)
             {
-                speed = normalSpeed;
+                speed += slowBallMultiplier;
                 slowBallOn = false;
             }
         }
@@ -90,15 +92,17 @@ public class BallBehaviour : MonoBehaviour
     }
 
     //pone la duracion del buff de Fastball
-    public void FastBallSpeedReset(float buffDuration)
+    public void FastBallSpeedReset(float buffDuration, float buffPower)
     {
         fastBallDuration = buffDuration;
+        fastBallMultiplier = buffPower;
     }
 
     //pone la duracion del buff de Slowball
-    public void SlowBallSpeedReset(float buffDuration)
+    public void SlowBallSpeedReset(float buffDuration, float buffPower)
     {
         slowBallDuration = buffDuration;
+        slowBallMultiplier = buffPower;
     }
 
     //pone la duracion del buff de DamageBall
