@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private SpriteRenderer playerSpriteRenderer;
     private CapsuleCollider2D playerCapsuleCollider2D;
     public BallBehaviour ballBehaviour;
+    public BlockBehaviour blockBehaviour;
     private SpriteRenderer ballSpriteRenderer;
     [SerializeField] Sprite smallPlayer;
     [SerializeField] Sprite normalPlayer;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     public int currentLives;
     [SerializeField] private int maxLives;
     public List<BallBehaviour> ballList = new List<BallBehaviour>();
+    public List<BlockBehaviour> blockList = new List<BlockBehaviour>();
     #endregion
 
     private void Awake()
@@ -186,6 +188,29 @@ public class GameManager : MonoBehaviour
     public void BallAdd(BallBehaviour ball)
     {
         ballList.Add(ball);
+    }
+
+    //Block spawner
+    public void BlockSpawner(BlockBehaviour block)
+    {
+        var height = 6;
+        var width = 20;
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                Instantiate(block, new Vector3(x, y, 0), Quaternion.identity);
+            }
+        }
+    //Block add
+    public void BlockAdd(BlockBehaviour block)
+    {
+        blockList.Add(block);
+    }
+    //Block Remove
+    public void BlockRemover(BlockBehaviour block)
+    {
+        blockList.Remove(block);
     }
     
     //LifeCounter

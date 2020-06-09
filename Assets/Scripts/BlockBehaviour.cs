@@ -16,6 +16,7 @@ public class BlockBehaviour : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         SpriteSelector();
+        GameManager.Instance.BlockAdd(this);
     }
     
     //Cuando collisiona se fija si es alguna "Ball" y le resta la cantidad de daño que tenga
@@ -54,5 +55,11 @@ public class BlockBehaviour : MonoBehaviour
         }
         currentSprite = hitpoints;
         spriteRenderer.sprite = spriteArray[currentSprite];
+    }
+
+    //Se saca de la lista cuando se destruye
+    private void OnDestroy()
+    {
+        GameManager.Instance.BlockRemover(this);
     }
 }
