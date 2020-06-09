@@ -172,11 +172,9 @@ public class GameManager : MonoBehaviour
     {
         if (ballList.Count == 0 && currentLives > 0)
         {
-            
             Transform spawnLocation = playerMainController.transform.Find("StartPoint");
             Vector3 position = spawnLocation.position;
             BallBehaviour newBall = Instantiate(ballBehaviour, position, Quaternion.identity);
-            //newBall.direction = Vector3.zero;
         }
     }
     //Ball Remover
