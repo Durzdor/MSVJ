@@ -47,18 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc47c9f2bbe4c9d4b89a1326055db60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: {x: -1, y: -1, z: 0}
   speed: 5
-  normalSpeed: 5
   dmg: 1
-  baseDmg: 1
   slowBallOn: 0
   slowBallDuration: 0
+  slowBallMultiplier: 0
   fastBallOn: 0
   fastBallDuration: 0
+  fastBallMultiplier: 0
   damageBallOn: 0
   damageBallDuration: 0
+  damageBallPower: 0
   cannonBallOn: 0
   cannonBallDuration: 0
+  cannonBallPower: 0
 --- !u!212 &4314791205297280778
 SpriteRenderer:
   m_ObjectHideFlags: 0

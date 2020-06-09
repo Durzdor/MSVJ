@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7860543351882840387}
   - component: {fileID: 7860543351882840413}
+  - component: {fileID: 1891459098080548089}
   - component: {fileID: 7860543351882840386}
   - component: {fileID: 2284412133932173247}
   m_Layer: 9
@@ -46,7 +47,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  destroytimer: 20
+--- !u!114 &1891459098080548089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7860543351882840384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bc88c67b910b64409255087405aa232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballAmount: 1
+  extraLifes: 2
 --- !u!212 &7860543351882840386
 SpriteRenderer:
   m_ObjectHideFlags: 0

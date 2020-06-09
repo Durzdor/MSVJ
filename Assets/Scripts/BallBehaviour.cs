@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallBehaviour : MonoBehaviour
 {
     #region Variables
-    private Vector3 direction = Vector3.down;
+    public Vector3 direction = Vector3.zero; //Vector3.up + Vector3.right;
     public float speed;
     public int dmg;
     private Vector2 collisionNormal;
@@ -30,7 +30,6 @@ public class BallBehaviour : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
     private void Update()
     {
         //Lo que pasa si tengo el FastPowerup
@@ -83,39 +82,39 @@ public class BallBehaviour : MonoBehaviour
     {
         rb2D.velocity = direction * speed;
     }
-
     //Hace un reflejo para conseguir nueva direccion
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collisionNormal = collision.contacts[0].normal;
-        direction = Vector2.Reflect(direction, collisionNormal);
+        direction = Vector2.Reflect(direction, collisionNormal).normalized;
     }
-
     //pone la duracion del buff de Fastball
     public void FastBallSpeedReset(float buffDuration, float buffPower)
     {
         fastBallDuration = buffDuration;
         fastBallMultiplier = buffPower;
     }
-
     //pone la duracion del buff de Slowball
     public void SlowBallSpeedReset(float buffDuration, float buffPower)
     {
         slowBallDuration = buffDuration;
         slowBallMultiplier = buffPower;
     }
-
     //pone la duracion del buff de DamageBall
     public void DamageBallDmgReset(float buffDuration, int buffPower)
     {
         damageBallDuration = buffDuration;
         damageBallPower = buffPower;
     }
-
     //pone la duracion del buff de CannonBall
     public void CannonBallDmgReset(float buffDuration, int buffPower)
     {
         cannonBallDuration = buffDuration;
         cannonBallPower = buffPower;
+    }
+    //Reduce el puntaje cuando se destruye
+    private void OnDestroy()
+    {
+        GameManager.Instance.LifeCounter();
     }
 }

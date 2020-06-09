@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\OutofBounds.cs" />
     <Compile Include="Assets\Scripts\ShrinkPower.cs" />
     <Compile Include="Assets\Scripts\SlowPower.cs" />
+    <Compile Include="Assets\Scripts\TriplePower.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Unity Projects/Github/MSVJ/MSVJ/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

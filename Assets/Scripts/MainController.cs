@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
+    #region Variables
     private Vector3 direction;
     [SerializeField] private float speed = 10f;
     public bool smallPowerOn;
@@ -13,12 +14,11 @@ public class MainController : MonoBehaviour
     public float largePowerDuration;
     public float largePowerMultiplier;
     private Rigidbody2D rb2D;
-
+    #endregion
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
     }
-
     void Update()
     {
         Movement();

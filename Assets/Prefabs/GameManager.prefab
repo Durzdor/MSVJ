@@ -49,3 +49,5 @@ MonoBehaviour:
   smallPlayer: {fileID: 21300000, guid: 0800b3d40b54c954fa365702df490919, type: 3}
   normalPlayer: {fileID: 21300000, guid: e9611adad499a394c976f2b21ed2251a, type: 3}
   largePlayer: {fileID: 21300000, guid: 392e881312a08b94ba78dfd7ee1e2b2c, type: 3}
+  currentLives: 0
+  maxLives: 3

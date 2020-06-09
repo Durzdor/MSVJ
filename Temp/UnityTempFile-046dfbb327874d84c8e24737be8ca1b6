@@ -296,3 +296,4 @@ Assets\Scripts\MainController.cs
 Assets\Scripts\OutofBounds.cs
 Assets\Scripts\ShrinkPower.cs
 Assets\Scripts\SlowPower.cs
+Assets\Scripts\TriplePower.cs

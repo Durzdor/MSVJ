@@ -9,23 +9,26 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public static float score;
     [SerializeField] private static int baseScore = 100;
-    public GameObject playerObject;
-    public GameObject ballObject;
+    public GameObject playerObject; 
     private MainController playerMainController;
     private SpriteRenderer playerSpriteRenderer;
     private CapsuleCollider2D playerCapsuleCollider2D;
-    private BallBehaviour ballBehaviour;
+    public BallBehaviour ballBehaviour;
     private SpriteRenderer ballSpriteRenderer;
     [SerializeField] Sprite smallPlayer;
     [SerializeField] Sprite normalPlayer;
     [SerializeField] Sprite largePlayer;
     private float playerSize = 1f;
     private float defaultSizeMultiplier = 1f;
+    public int currentLives;
+    [SerializeField] private int maxLives;
     #endregion
-    //Singleton
+
+    
     private void Awake()
     {
-        if(Instance == null)
+        //Singleton
+        if (Instance == null)
         {
             Instance = this;
 
@@ -38,8 +41,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
+        currentLives = maxLives;
 
+    }
     private void Start()
     {
         //Player components
@@ -48,25 +52,25 @@ public class GameManager : MonoBehaviour
         playerCapsuleCollider2D = playerObject.GetComponent<CapsuleCollider2D>();
 
         //Ball components
-        ballBehaviour = ballObject.GetComponent<BallBehaviour>();
-        ballSpriteRenderer = ballObject.GetComponent<SpriteRenderer>();
+        ballBehaviour = ballBehaviour.GetComponent<BallBehaviour>();
+        ballSpriteRenderer = ballBehaviour.GetComponent<SpriteRenderer>();
 
     }
-    
+
     //propiedades de FastPowerup
     public void FastBall(float speedMultiplier, float buffDuration)
     {
         ballBehaviour.speed += speedMultiplier;
         ballBehaviour.fastBallOn = true;
-        ballBehaviour.FastBallSpeedReset(buffDuration, speedMultiplier);      
+        ballBehaviour.FastBallSpeedReset(buffDuration, speedMultiplier);
     }
-   
+
     //propiedades de SlowPowerup
     public void SlowBall(float speedMultiplier, float buffDuration)
     {
         ballBehaviour.speed -= speedMultiplier;
         ballBehaviour.slowBallOn = true;
-        ballBehaviour.SlowBallSpeedReset(buffDuration, speedMultiplier);       
+        ballBehaviour.SlowBallSpeedReset(buffDuration, speedMultiplier);
     }
 
     //propiedades de DamagePowerup
@@ -88,7 +92,7 @@ public class GameManager : MonoBehaviour
     //Cuenta los puntos conseguidos
     public void ScoreCounter(int dmg)
     {
-        if (dmg >20)
+        if (dmg > 20)
         {
             dmg = 20;
         }
@@ -114,6 +118,7 @@ public class GameManager : MonoBehaviour
         //playerMainController.normalPowerOn = true;
         playerSize -= sizeMultiplier;
     }
+
     //propiedades de EnlargePowerup
     public void EnlargePlayer(float buffDuration, float sizeMultiplier)
     {
@@ -122,5 +127,27 @@ public class GameManager : MonoBehaviour
         playerMainController.largePowerOn = true;
         playerMainController.EnlargePlayerReset(buffDuration, sizeMultiplier);
         playerSize = sizeMultiplier;
+    }
+
+    //propiedades de TriplePowerup
+    public void TripleBall(int ballAmount, int extraLives)
+    {
+        Vector3 offset = (Vector3.right + Vector3.up) / 3;
+        currentLives += extraLives;
+        for (int i = 0; i < ballAmount; i++)
+        {
+            BallBehaviour extraball = Instantiate(ballBehaviour, ballBehaviour.transform.position + offset, transform.rotation);
+            extraball.GetComponent<SpriteRenderer>().color = Color.blue;
+            extraball.direction = ballBehaviour.direction;
+            BallBehaviour extraextraball = Instantiate(ballBehaviour, ballBehaviour.transform.position - offset, transform.rotation);
+            extraextraball.GetComponent<SpriteRenderer>().color = Color.magenta;
+            extraextraball.direction = ballBehaviour.direction;
+        }
+    }
+
+    //LifeCounter
+    public void LifeCounter()
+    {
+        currentLives--;
     }
 }
