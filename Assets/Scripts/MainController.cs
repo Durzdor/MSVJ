@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
+
 public class MainController : MonoBehaviour
 {
     #region Variables
@@ -16,8 +18,17 @@ public class MainController : MonoBehaviour
     private Rigidbody2D rb2D;
     [HideInInspector] public bool magnetPowerOn;
     [HideInInspector] public float magnetPowerDuration;
+    public Camera mainCamera;
+    private LineRenderer lineRenderer;
+    public Transform LaserHit;
     #endregion
 
+    private void Start()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = true;
+        lineRenderer.useWorldSpace = true;
+    }
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -25,6 +36,7 @@ public class MainController : MonoBehaviour
     void Update()
     {
         Movement();
+        FollowMouse();
         //lo que pasa si esta ShrinkPowerup
         if (smallPowerOn)
         {
@@ -93,5 +105,19 @@ public class MainController : MonoBehaviour
     public void MagnetPlayerReset(float buffDuration)
     {
         magnetPowerDuration = buffDuration;
+    }
+
+    public void FollowMouse()
+    {
+        Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+        Transform spawnLocation = transform.Find("StartPoint");
+        Vector2 spawnPosition = spawnLocation.position;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up);
+        Debug.DrawLine(transform.position, hit.point);
+        LaserHit.position = hit.point;
+        lineRenderer.SetPosition(0, spawnPosition);
+        lineRenderer.SetPosition(1, mouseWorldPosition);
     }
 }
