@@ -47,9 +47,40 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   ballBehaviour: {fileID: 624175036983970974, guid: 4d1e47ab7d3cbd649be51507c67667f4,
     type: 3}
+  blockBehaviour: {fileID: 5330770691519993201, guid: 8b7f9b07864174a44ba5199ff6678a73,
+    type: 3}
   smallPlayer: {fileID: 21300000, guid: 0800b3d40b54c954fa365702df490919, type: 3}
   normalPlayer: {fileID: 21300000, guid: e9611adad499a394c976f2b21ed2251a, type: 3}
   largePlayer: {fileID: 21300000, guid: 392e881312a08b94ba78dfd7ee1e2b2c, type: 3}
   currentLives: 0
   maxLives: 3
   ballList: []
+  blockList: []
+  blockHeight: 5
+  blockWidth: 17
+  blockSpawnPosition: {x: -8, y: -1, z: 0}
+  dropList:
+  - {fileID: 82286070798677832, guid: 8eaa809a701cd6043a41c60054e82eb3, type: 3}
+  - {fileID: 473031866301099999, guid: 7f996d605a8584742a43123a6439ce19, type: 3}
+  - {fileID: 191450329422582708, guid: da1a7a2b1030fae4d8bfe7adf07b96e3, type: 3}
+  - {fileID: 7533129757406657491, guid: bb3e540f2e8de2e448a4ebfc38bb4d8b, type: 3}
+  - {fileID: 5723105484426847340, guid: 3ac0527c22dc00a4183f2fd77a56dc25, type: 3}
+  - {fileID: 8814020263718000615, guid: e8ba7cf733c326349a8b70165f485621, type: 3}
+  - {fileID: 7860543351882840413, guid: fd116c9e2a51b964f88b17b8b278c48e, type: 3}
+  - {fileID: 7839734534142701800, guid: 44399274b8c7a9e469f8fb06f8e7078f, type: 3}
+  - {fileID: 2992986346986848195, guid: bbd008d428506004db46bf5de29294ca, type: 3}
+  - {fileID: 3080248458357360828, guid: a1c9a5d431cf00e46984c68ec12f685b, type: 3}
+  - {fileID: 1302898994362713782, guid: cb5c9bf5185360e4e8fd47a7fd3358fb, type: 3}
+  - {fileID: 8454737083172691591, guid: eb4baf820c27f9545942edea68dea19b, type: 3}
+  - {fileID: 2992986346986848195, guid: bbd008d428506004db46bf5de29294ca, type: 3}
+  - {fileID: 3080248458357360828, guid: a1c9a5d431cf00e46984c68ec12f685b, type: 3}
+  - {fileID: 1302898994362713782, guid: cb5c9bf5185360e4e8fd47a7fd3358fb, type: 3}
+  - {fileID: 8454737083172691591, guid: eb4baf820c27f9545942edea68dea19b, type: 3}
+  - {fileID: 2992986346986848195, guid: bbd008d428506004db46bf5de29294ca, type: 3}
+  - {fileID: 3080248458357360828, guid: a1c9a5d431cf00e46984c68ec12f685b, type: 3}
+  - {fileID: 1302898994362713782, guid: cb5c9bf5185360e4e8fd47a7fd3358fb, type: 3}
+  - {fileID: 8454737083172691591, guid: eb4baf820c27f9545942edea68dea19b, type: 3}
+  - {fileID: 2992986346986848195, guid: bbd008d428506004db46bf5de29294ca, type: 3}
+  - {fileID: 3080248458357360828, guid: a1c9a5d431cf00e46984c68ec12f685b, type: 3}
+  - {fileID: 1302898994362713782, guid: cb5c9bf5185360e4e8fd47a7fd3358fb, type: 3}
+  - {fileID: 8454737083172691591, guid: eb4baf820c27f9545942edea68dea19b, type: 3}

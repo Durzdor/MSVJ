@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Durzdor\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Durzdor\AppData\Local\JetBrains\Rider2020.1\resharper-host\Local\Transient\ReSharperHost\v201\SolutionCaches\_MSVJ.-1629117322.00" t="ExcludeRecursive" />
+    <e p="D:\Unity Projects\Github\MSVJ\MSVJ" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="BallBehaviour.cs" t="Include" />
+          <e p="BlockBehaviour.cs" t="Include" />
+          <e p="CannonPower.cs" t="Include" />
+          <e p="DamagePower.cs" t="Include" />
+          <e p="Drops.cs" t="Include" />
+          <e p="EnlargePower.cs" t="Include" />
+          <e p="FastPower.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="MagnetPower.cs" t="Include" />
+          <e p="MainController.cs" t="Include" />
+          <e p="OutofBounds.cs" t="Include" />
+          <e p="ScorePower.cs" t="Include" />
+          <e p="ShrinkPower.cs" t="Include" />
+          <e p="SlowPower.cs" t="Include" />
+          <e p="TriplePower.cs" t="Include" />
+        </e>
+      </e>
+      <e p="MSVJ.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

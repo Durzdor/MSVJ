@@ -9,14 +9,17 @@ public class BlockBehaviour : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
     private int currentSprite;
+    public int dropNumber;
     #endregion
     
     //Guarda su componente SpriteRenderer y pone su sprite de acuerdo a su vida
     private void Awake()
     {
+        hitpoints = Random.Range(1, 21);
         spriteRenderer = GetComponent<SpriteRenderer>();
         SpriteSelector();
         GameManager.Instance.BlockAdd(this);
+        DropNumber();
     }
     
     //Cuando collisiona se fija si es alguna "Ball" y le resta la cantidad de daño que tenga
@@ -43,6 +46,8 @@ public class BlockBehaviour : MonoBehaviour
         if (hitpoints <= 0)
         {
             Destroy(gameObject);
+            GameManager.Instance.BlockRemover(this);
+            GameManager.Instance.DropAssign(this, dropNumber);
         }
     }
 
@@ -57,9 +62,9 @@ public class BlockBehaviour : MonoBehaviour
         spriteRenderer.sprite = spriteArray[currentSprite];
     }
 
-    //Se saca de la lista cuando se destruye
-    private void OnDestroy()
+    //tiene algun drop o no
+    private void DropNumber()
     {
-        GameManager.Instance.BlockRemover(this);
+        dropNumber = Random.Range(0, GameManager.Instance.dropList.Count);
     }
 }

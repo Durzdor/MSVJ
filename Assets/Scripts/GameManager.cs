@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int maxLives;
     public List<BallBehaviour> ballList = new List<BallBehaviour>();
     public List<BlockBehaviour> blockList = new List<BlockBehaviour>();
+    [SerializeField] private int blockHeight;
+    [SerializeField] private int blockWidth;
+    [SerializeField] private Vector3 blockSpawnPosition;
+    public List<Drops> dropList = new List<Drops>();
     #endregion
 
     private void Awake()
@@ -44,6 +49,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         currentLives = maxLives;
+        BlockSpawner();
     }
     private void Start()
     {
@@ -170,7 +176,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Ball respawner
-    public void BallRespawner()
+    private void BallRespawner()
     {
         if (ballList.Count == 0 && currentLives > 0)
         {
@@ -191,17 +197,16 @@ public class GameManager : MonoBehaviour
     }
 
     //Block spawner
-    public void BlockSpawner(BlockBehaviour block)
+    public void BlockSpawner()
     {
-        var height = 6;
-        var width = 20;
-        for (int y = 0; y < height; ++y)
+        for (int y = 0; y < blockHeight; ++y)
         {
-            for (int x = 0; x < width; ++x)
+            for (int x = 0; x < blockWidth; ++x)
             {
-                Instantiate(block, new Vector3(x, y, 0), Quaternion.identity);
+                Instantiate(blockBehaviour, blockSpawnPosition + new Vector3(x,y,0), Quaternion.identity);
             }
         }
+    }
     //Block add
     public void BlockAdd(BlockBehaviour block)
     {
@@ -211,6 +216,16 @@ public class GameManager : MonoBehaviour
     public void BlockRemover(BlockBehaviour block)
     {
         blockList.Remove(block);
+    }
+    
+    //Block Drops
+    public void DropAssign(BlockBehaviour block, int dropNumber)
+    {
+        //Checkea vidas y cantidad de bloques es divisible por 3
+        if (currentLives > 0 && blockList.Count % 3 == 0)
+        {
+                Instantiate(dropList[dropNumber], block.transform.position, transform.rotation);
+        }
     }
     
     //LifeCounter
@@ -233,5 +248,8 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("GameOver");
+        Time.timeScale = 0.0f;
+        //(esto es un reload)SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
 }
