@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite normalPlayer;
     [SerializeField] Sprite largePlayer;
     private float playerSize = 1f;
-    private float defaultSizeMultiplier = 1f;
     public int currentLives;
     [SerializeField] private int maxLives;
     public List<BallBehaviour> ballList = new List<BallBehaviour>();
@@ -30,6 +29,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int blockWidth;
     [SerializeField] private Vector3 blockSpawnPosition;
     public List<Drops> dropList = new List<Drops>();
+    private int blockCount;
+    private bool notDone = true;
     #endregion
 
     private void Awake()
@@ -57,9 +58,7 @@ public class GameManager : MonoBehaviour
         playerMainController = playerObject.GetComponent<MainController>();
         playerSpriteRenderer = playerObject.GetComponent<SpriteRenderer>();
         playerCapsuleCollider2D = playerObject.GetComponent<CapsuleCollider2D>();
-    }
-    private void Update()
-    {
+        blockCount = blockList.Count / 2;
         BallRespawner();
     }
 
@@ -176,14 +175,12 @@ public class GameManager : MonoBehaviour
     }
 
     //Ball respawner
-    private void BallRespawner()
+    public void BallRespawner()
     {
-        if (ballList.Count == 0 && currentLives > 0)
-        {
-            Transform spawnLocation = playerMainController.transform.Find("StartPoint");
-            Vector3 position = spawnLocation.position;
-            BallBehaviour newBall = Instantiate(ballBehaviour, position, Quaternion.identity);
-        }
+        if (ballList.Count != 0 || currentLives <= 0) return;
+        Transform spawnLocation = playerMainController.transform.Find("StartPoint");
+        Vector3 position = spawnLocation.position;
+        BallBehaviour newBall = Instantiate(ballBehaviour, position, Quaternion.identity);
     }
     //Ball Remover
     public void BallRemover(BallBehaviour ball)
@@ -197,7 +194,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Block spawner
-    public void BlockSpawner()
+    private void BlockSpawner()
     {
         for (int y = 0; y < blockHeight; ++y)
         {
@@ -207,6 +204,12 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    private void Instantiate()
+    {
+        throw new System.NotImplementedException();
+    }
+
     //Block add
     public void BlockAdd(BlockBehaviour block)
     {
@@ -216,6 +219,17 @@ public class GameManager : MonoBehaviour
     public void BlockRemover(BlockBehaviour block)
     {
         blockList.Remove(block);
+        if (blockList.Count <= 0)
+        {
+            WinGame();
+        }
+        if (blockList.Count > blockCount || ballList.Count <= 0 || !notDone) return;
+        foreach (var ball in ballList)
+        {
+            ball.speed += 2;
+        }
+        ballBehaviour.speed += 2;
+        notDone = false;
     }
     
     //Block Drops
@@ -227,7 +241,6 @@ public class GameManager : MonoBehaviour
                 Instantiate(dropList[dropNumber], block.transform.position, transform.rotation);
         }
     }
-    
     //LifeCounter
     public void LifeCounter()
     {
@@ -236,7 +249,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Lose conditions
-    public void LoseCondition()
+    private void LoseCondition()
     {
         if (currentLives <= 0)
         {
@@ -250,6 +263,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameOver");
         Time.timeScale = 0.0f;
         //(esto es un reload)SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
+    }
+    
+    // Win game
+    private void WinGame()
+    {
+        Debug.Log("You Win");
+        Time.timeScale = 0.0f;  
     }
 }

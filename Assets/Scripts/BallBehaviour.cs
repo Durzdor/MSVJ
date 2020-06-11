@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ public class BallBehaviour : MonoBehaviour
     [HideInInspector] public bool cannonBallOn;
     [HideInInspector] public float cannonBallDuration;
     [HideInInspector] public int cannonBallPower;
+    public AudioSource blockHitSound;
+    public AudioSource playerHitSound;
     #endregion
 
     private void Awake()
@@ -76,7 +79,6 @@ public class BallBehaviour : MonoBehaviour
                 dmg -= cannonBallPower - 1;
                 spriteRenderer.color = Color.white;
             }
-            
         }
     }
     private void FixedUpdate()
@@ -87,8 +89,19 @@ public class BallBehaviour : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collisionNormal = collision.contacts[0].normal;
+        
         direction = Vector2.Reflect(direction, collisionNormal).normalized;
+
+        if (collision.transform.CompareTag("Block"))
+        {
+            blockHitSound.Play();
+        }
+        if (collision.transform.CompareTag("Player"))
+        {
+            playerHitSound.Play();
+        }
     }
+
     //pone la duracion del buff de Fastball
     public void FastBallSpeedReset(float buffDuration, float buffPower)
     {
@@ -118,6 +131,7 @@ public class BallBehaviour : MonoBehaviour
     {
         GameManager.Instance.LifeCounter();
         GameManager.Instance.BallRemover(this);
+        GameManager.Instance.BallRespawner();
+        
     }
-    
 }

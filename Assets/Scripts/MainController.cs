@@ -20,7 +20,7 @@ public class MainController : MonoBehaviour
     [HideInInspector] public float magnetPowerDuration;
     public Camera mainCamera;
     private LineRenderer lineRenderer;
-    public Transform LaserHit;
+    public Transform laserHit;
     #endregion
 
     private void Start()
@@ -116,7 +116,7 @@ public class MainController : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up);
         Debug.DrawLine(transform.position, hit.point);
-        LaserHit.position = hit.point;
+        laserHit.position = hit.point;
         lineRenderer.SetPosition(0, spawnPosition);
         lineRenderer.SetPosition(1, mouseWorldPosition);
     }
