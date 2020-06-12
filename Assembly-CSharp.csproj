@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\BlockBehaviour.cs" />
      <Compile Include="Assets\Scripts\CannonPower.cs" />
      <Compile Include="Assets\Scripts\DamagePower.cs" />
+     <Compile Include="Assets\Scripts\DeveloperTools.cs" />
      <Compile Include="Assets\Scripts\Drops.cs" />
      <Compile Include="Assets\Scripts\EnlargePower.cs" />
      <Compile Include="Assets\Scripts\FastPower.cs" />

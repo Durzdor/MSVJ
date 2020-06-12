@@ -276,14 +276,14 @@ public class GameManager : MonoBehaviour
     }
 
     //Gameover stuff
-    private void GameOver()
+    public void GameOver()
     {
         gameOverPopup.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     // Win game
-    private void WinGame()
+    public void WinGame()
     {
         winPopup.SetActive(true);
         Time.timeScale = 0.0f;

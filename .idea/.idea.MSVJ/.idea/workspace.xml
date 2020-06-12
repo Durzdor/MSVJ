@@ -39,19 +39,21 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Drops.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/OutofBounds.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DeveloperTools.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CannonPower.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/BlockBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MainController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameOver.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Win.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/OutofBounds.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/BallBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MainController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DeveloperTools.cs" />
       </list>
     </option>
   </component>
@@ -96,7 +98,7 @@
       <workItem from="1591770214781" duration="7924000" />
       <workItem from="1591830434859" duration="1814000" />
       <workItem from="1591837003616" duration="17763000" />
-      <workItem from="1591916753676" duration="10952000" />
+      <workItem from="1591916753676" duration="13938000" />
     </task>
     <servers />
   </component>

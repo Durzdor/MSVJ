@@ -14,6 +14,7 @@
           <e p="BlockBehaviour.cs" t="Include" />
           <e p="CannonPower.cs" t="Include" />
           <e p="DamagePower.cs" t="Include" />
+          <e p="DeveloperTools.cs" t="Include" />
           <e p="Drops.cs" t="Include" />
           <e p="EnlargePower.cs" t="Include" />
           <e p="FastPower.cs" t="Include" />
