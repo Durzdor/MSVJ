@@ -53,7 +53,7 @@ MonoBehaviour:
   normalPlayer: {fileID: 21300000, guid: e9611adad499a394c976f2b21ed2251a, type: 3}
   largePlayer: {fileID: 21300000, guid: 392e881312a08b94ba78dfd7ee1e2b2c, type: 3}
   currentLives: 0
-  maxLives: 2147483647
+  maxLives: 1000
   ballList: []
   blockList: []
   blockHeight: 5
@@ -72,3 +72,6 @@ MonoBehaviour:
   - {fileID: 3080248458357360828, guid: a1c9a5d431cf00e46984c68ec12f685b, type: 3}
   - {fileID: 1302898994362713782, guid: cb5c9bf5185360e4e8fd47a7fd3358fb, type: 3}
   - {fileID: 8454737083172691591, guid: eb4baf820c27f9545942edea68dea19b, type: 3}
+  defaultBallSpeed: 7
+  scoreText: {fileID: 0}
+  livesText: {fileID: 0}

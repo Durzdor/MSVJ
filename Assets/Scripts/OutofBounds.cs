@@ -11,6 +11,9 @@ public class OutofBounds : MonoBehaviour
         if (collision.transform.CompareTag("Ball"))
         { 
             ballDeathSound.Play();
+            GameManager.Instance.LifeCounter();
+            GameManager.Instance.BallRemover(collision.GetComponent<BallBehaviour>());
+            GameManager.Instance.BallRespawner();
         }
         Destroy(collision.gameObject);
     }

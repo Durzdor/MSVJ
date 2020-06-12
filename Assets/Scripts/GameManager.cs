@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    #region Variables
-    [HideInInspector]public bool dontDestroyOnLoad;
+    [HideInInspector] public bool dontDestroyOnLoad;
     public static GameManager Instance;
     public static float score;
     [SerializeField] private static int baseScore = 100;
-    public GameObject playerObject; 
+    public GameObject playerObject;
     private MainController playerMainController;
     private SpriteRenderer playerSpriteRenderer;
     private CapsuleCollider2D playerCapsuleCollider2D;
@@ -31,7 +31,11 @@ public class GameManager : MonoBehaviour
     public List<Drops> dropList = new List<Drops>();
     private int blockCount;
     private bool notDone = true;
-    #endregion
+    [SerializeField] private int defaultBallSpeed;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI livesText;
+    [SerializeField] private GameObject gameOverPopup;
+    [SerializeField] private GameObject winPopup;
 
     private void Awake()
     {
@@ -49,9 +53,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         currentLives = maxLives;
         BlockSpawner();
+        ballBehaviour.speed = defaultBallSpeed;
+        ScoreBonus(0);
+        livesText.text = $"Lives: {currentLives}";
+        gameOverPopup.SetActive(false);
+        winPopup.SetActive(false);
     }
+
     private void Start()
     {
         //Player components
@@ -113,15 +124,16 @@ public class GameManager : MonoBehaviour
         {
             dmg = 20;
         }
+
         score += baseScore * dmg * playerSize;
-        Debug.Log(score);
+        scoreText.text = $"Score: {score}";
     }
 
     //Cuenta los puntos conseguidos por drop
     public void ScoreBonus(int bonusScore)
     {
         score += bonusScore;
-        Debug.Log(score);
+        scoreText.text = $"Score: {score}";
     }
 
     //propiedades de ShrinkPowerup
@@ -158,11 +170,14 @@ public class GameManager : MonoBehaviour
     {
         Vector3 offset = (Vector3.right + Vector3.up) / 3;
         currentLives += extraLives;
+        livesText.text = $"Lives: {currentLives}";
         for (int i = 0; i < ballAmount; i++)
         {
-            BallBehaviour extraball = Instantiate(ballBehaviour, ballList[0].transform.position + offset, transform.rotation); 
+            BallBehaviour extraball =
+                Instantiate(ballBehaviour, ballList[0].transform.position + offset, transform.rotation);
             extraball.direction = ballList[0].direction.normalized;
-            BallBehaviour extraextraball = Instantiate(ballBehaviour, ballList[0].transform.position - offset, transform.rotation);
+            BallBehaviour extraextraball =
+                Instantiate(ballBehaviour, ballList[0].transform.position - offset, transform.rotation);
             extraextraball.direction = ballList[0].direction.normalized;
         }
     }
@@ -174,19 +189,22 @@ public class GameManager : MonoBehaviour
         playerMainController.MagnetPlayerReset(buffDuration);
     }
 
+
     //Ball respawner
     public void BallRespawner()
     {
-        if (ballList.Count != 0 || currentLives <= 0) return;
+        if (ballList.Count != 0 || currentLives <= 0 || playerMainController == null) return;
         Transform spawnLocation = playerMainController.transform.Find("StartPoint");
         Vector3 position = spawnLocation.position;
         BallBehaviour newBall = Instantiate(ballBehaviour, position, Quaternion.identity);
     }
+
     //Ball Remover
     public void BallRemover(BallBehaviour ball)
     {
         ballList.Remove(ball);
     }
+
     //Ball Add
     public void BallAdd(BallBehaviour ball)
     {
@@ -200,14 +218,9 @@ public class GameManager : MonoBehaviour
         {
             for (int x = 0; x < blockWidth; ++x)
             {
-                Instantiate(blockBehaviour, blockSpawnPosition + new Vector3(x,y,0), Quaternion.identity);
+                Instantiate(blockBehaviour, blockSpawnPosition + new Vector3(x, y, 0), Quaternion.identity);
             }
         }
-    }
-
-    private void Instantiate()
-    {
-        throw new System.NotImplementedException();
     }
 
     //Block add
@@ -215,6 +228,7 @@ public class GameManager : MonoBehaviour
     {
         blockList.Add(block);
     }
+
     //Block Remove
     public void BlockRemover(BlockBehaviour block)
     {
@@ -223,28 +237,32 @@ public class GameManager : MonoBehaviour
         {
             WinGame();
         }
+
         if (blockList.Count > blockCount || ballList.Count <= 0 || !notDone) return;
         foreach (var ball in ballList)
         {
             ball.speed += 2;
         }
+
         ballBehaviour.speed += 2;
         notDone = false;
     }
-    
+
     //Block Drops
     public void DropAssign(BlockBehaviour block, int dropNumber)
     {
         //Checkea vidas y cantidad de bloques es divisible por 3
         if (currentLives > 0 && blockList.Count % 3 == 0)
         {
-                Instantiate(dropList[dropNumber], block.transform.position, transform.rotation);
+            Instantiate(dropList[dropNumber], block.transform.position, transform.rotation);
         }
     }
+
     //LifeCounter
     public void LifeCounter()
     {
         currentLives--;
+        livesText.text = $"Lives: {currentLives}";
         LoseCondition();
     }
 
@@ -256,19 +274,18 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
     }
-    
+
     //Gameover stuff
     private void GameOver()
     {
-        Debug.Log("GameOver");
+        gameOverPopup.SetActive(true);
         Time.timeScale = 0.0f;
-        //(esto es un reload)SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
+
     // Win game
     private void WinGame()
     {
-        Debug.Log("You Win");
-        Time.timeScale = 0.0f;  
+        winPopup.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 }

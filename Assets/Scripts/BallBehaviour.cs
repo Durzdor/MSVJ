@@ -126,12 +126,4 @@ public class BallBehaviour : MonoBehaviour
         cannonBallDuration = buffDuration;
         cannonBallPower = buffPower;
     }
-    //Reduce el puntaje cuando se destruye
-    private void OnDestroy()
-    {
-        GameManager.Instance.LifeCounter();
-        GameManager.Instance.BallRemover(this);
-        GameManager.Instance.BallRespawner();
-        
-    }
 }
