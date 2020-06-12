@@ -51,6 +51,10 @@ MonoBehaviour:
   direction: {x: -1, y: 1, z: 0}
   speed: 7
   dmg: 1
+  isStopped: 1
+  playerTransform: {fileID: 4682829160774102462, guid: 03490a2115d7fe24d9be18ebb1606650,
+    type: 3}
+  currentPos: {x: 400, y: 0}
   slowBallOn: 0
   slowBallDuration: 0
   slowBallMultiplier: 0

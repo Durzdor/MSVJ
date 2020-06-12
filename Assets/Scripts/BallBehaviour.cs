@@ -9,6 +9,7 @@ public class BallBehaviour : MonoBehaviour
     public Vector3 direction = Vector3.zero; //Vector3.up + Vector3.right;
     public float speed;
     public int dmg;
+    public bool isStopped = false;
     private Vector2 collisionNormal;
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRenderer;
@@ -37,6 +38,12 @@ public class BallBehaviour : MonoBehaviour
     }
     private void Update()
     {
+        //Lo que pasa si la pelota está frenada
+        if (isStopped)
+        {
+            //sigo al player
+            transform.position = new Vector2(GameObject.Find("MainPlayer").transform.position.x, transform.position.y);
+        }
         //Lo que pasa si tengo el FastPowerup
         if (fastBallOn)
         {

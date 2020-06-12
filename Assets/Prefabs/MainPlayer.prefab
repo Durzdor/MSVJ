@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 2728998584793445728}
   - component: {fileID: 7143755593591809641}
   - component: {fileID: 1918128265}
+  - component: {fileID: 1918128261}
   m_Layer: 8
   m_Name: MainPlayer
   m_TagString: Player
@@ -109,15 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6215ec248bf9a4185a1b2bf72570b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   smallPowerOn: 0
   smallPowerDuration: 0
   smallPowerMultiplier: 0
   largePowerOn: 0
   largePowerDuration: 0
   largePowerMultiplier: 0
-  magnetPowerOn: 0
-  magnetPowerDuration: 0
   mainCamera: {fileID: 0}
   laserHit: {fileID: 1433445650}
 --- !u!212 &7911048212545477237
@@ -249,7 +248,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.05
+    widthMultiplier: 0.08
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -302,3 +301,23 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &1918128261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427618059483325007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16549d4582bebba4f9567c051b92ed7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserDistance: 10
+  numberReflectMax: 3
+  mainCamera: {fileID: 0}
+  ballObject: {fileID: 4314791205297280820, guid: 4d1e47ab7d3cbd649be51507c67667f4,
+    type: 3}
+  layersToHit:
+    serializedVersion: 2
+    m_Bits: 6144

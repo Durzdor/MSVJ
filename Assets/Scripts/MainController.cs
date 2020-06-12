@@ -16,8 +16,6 @@ public class MainController : MonoBehaviour
     [HideInInspector] public float largePowerDuration;
     [HideInInspector] public float largePowerMultiplier;
     private Rigidbody2D rb2D;
-    [HideInInspector] public bool magnetPowerOn;
-    [HideInInspector] public float magnetPowerDuration;
     public Camera mainCamera;
     private LineRenderer lineRenderer;
     public Transform laserHit;
@@ -36,7 +34,7 @@ public class MainController : MonoBehaviour
     void Update()
     {
         Movement();
-        FollowMouse();
+        
         //lo que pasa si esta ShrinkPowerup
         if (smallPowerOn)
         {
@@ -59,31 +57,10 @@ public class MainController : MonoBehaviour
                 GameManager.Instance.NormalPlayer(largePowerMultiplier);
             }
         }
-        //lo que pasa si esta MagnetPowerup
-        if (magnetPowerOn)
-        {
-            magnetPowerDuration -= Time.deltaTime;
-
-            if (magnetPowerDuration <= 0)
-            {
-                magnetPowerOn = false;
-            }
-        }
     }
     private void FixedUpdate()
     {
         rb2D.velocity = direction * speed;
-    }
-    //Magnet Collision
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ball") && magnetPowerOn)
-        {
-            Vector2 freeze = Vector2.zero;
-            //collision.gameObject.GetComponent<Rigidbody2D>().velocity = freeze;
-            collision.gameObject.GetComponent<BallBehaviour>().direction = freeze;
-            
-        }
     }
     //Movimiento
     private void Movement()
@@ -101,24 +78,5 @@ public class MainController : MonoBehaviour
     {
         largePowerDuration = buffDuration;
         largePowerMultiplier = sizeMultiplier;
-    }
-    //propiedades de MagnetPowerup
-    public void MagnetPlayerReset(float buffDuration)
-    {
-        magnetPowerDuration = buffDuration;
-    }
-
-    public void FollowMouse()
-    {
-        Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-
-        Transform spawnLocation = transform.Find("StartPoint");
-        Vector2 spawnPosition = spawnLocation.position;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up);
-        Debug.DrawLine(transform.position, hit.point);
-        laserHit.position = hit.point;
-        lineRenderer.SetPosition(0, spawnPosition);
-        lineRenderer.SetPosition(1, mouseWorldPosition);
     }
 }

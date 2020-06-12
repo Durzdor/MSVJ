@@ -54,11 +54,6 @@ public class DeveloperTools : MonoBehaviour
         {
             GameManager.Instance.EnlargePlayer(5,-0.5f);
         }
-        //Activa el powerup Magnet
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            GameManager.Instance.MagnetPlayer(10);
-        }
         //Activa el Gameover
         if (Input.GetKeyDown(KeyCode.O))
         {

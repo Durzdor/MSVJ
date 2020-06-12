@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public BallBehaviour ballBehaviour;
     public BlockBehaviour blockBehaviour;
     private SpriteRenderer ballSpriteRenderer;
+    private LineRenderer laserRenderer;
     [SerializeField] Sprite smallPlayer;
     [SerializeField] Sprite normalPlayer;
     [SerializeField] Sprite largePlayer;
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
         playerMainController = playerObject.GetComponent<MainController>();
         playerSpriteRenderer = playerObject.GetComponent<SpriteRenderer>();
         playerCapsuleCollider2D = playerObject.GetComponent<CapsuleCollider2D>();
+        laserRenderer = playerObject.GetComponent<LineRenderer>();
         blockCount = blockList.Count / 2;
         BallRespawner();
     }
@@ -182,20 +184,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //propiedades de MagnetPowerup
-    public void MagnetPlayer(float buffDuration)
-    {
-        playerMainController.magnetPowerOn = true;
-        playerMainController.MagnetPlayerReset(buffDuration);
-    }
-
     //Ball respawner
     public void BallRespawner()
     {
+        ballBehaviour.isStopped = true;
+
         if (ballList.Count != 0 || currentLives <= 0 || playerMainController == null) return;
         Transform spawnLocation = playerMainController.transform.Find("StartPoint");
         Vector3 position = spawnLocation.position;
         BallBehaviour newBall = Instantiate(ballBehaviour, position, Quaternion.identity);
+
+        laserRenderer.enabled = true;
     }
 
     //Ball Remover
@@ -279,5 +278,18 @@ public class GameManager : MonoBehaviour
     public void LevelName()
     {
         levelText.text = currentLevel;
+    }
+
+    public void Shoot(Vector2 newDirection)
+    {
+        ballBehaviour.isStopped = false;
+
+        for (int i = 0; i < ballList.Count; i++)
+        {
+            if (!ballList[i].isStopped) return;
+
+            ballList[i].direction = newDirection;
+            ballList[i].isStopped = false;
+        }
     }
 }

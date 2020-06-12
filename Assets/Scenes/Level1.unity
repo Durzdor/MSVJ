@@ -315,11 +315,6 @@ PrefabInstance:
       objectReference: {fileID: 1600057392}
     - target: {fileID: 2516135101960011831, guid: 9a36df7c3ca9b244a838b3dff4b4ad9b,
         type: 3}
-      propertyPath: currentLevel
-      value: Level1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2516135101960011831, guid: 9a36df7c3ca9b244a838b3dff4b4ad9b,
-        type: 3}
       propertyPath: levelText
       value: 
       objectReference: {fileID: 775804204}
@@ -480,6 +475,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666398711083298810, guid: 03490a2115d7fe24d9be18ebb1606650,
         type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 1918128261, guid: 03490a2115d7fe24d9be18ebb1606650, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
