@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         gameOverPopup.SetActive(false);
         winPopup.SetActive(false);
         LevelName();
+        
     }
 
     private void Start()

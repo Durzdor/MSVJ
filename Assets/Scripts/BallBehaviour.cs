@@ -33,6 +33,7 @@ public class BallBehaviour : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         GameManager.Instance.BallAdd(this);
+        direction = Vector3.zero;
     }
     private void Update()
     {

@@ -82,6 +82,7 @@ public class MainController : MonoBehaviour
             Vector2 freeze = Vector2.zero;
             //collision.gameObject.GetComponent<Rigidbody2D>().velocity = freeze;
             collision.gameObject.GetComponent<BallBehaviour>().direction = freeze;
+            
         }
     }
     //Movimiento

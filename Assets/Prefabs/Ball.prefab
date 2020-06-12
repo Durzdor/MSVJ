@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc47c9f2bbe4c9d4b89a1326055db60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: -1, y: -1, z: 0}
+  direction: {x: -1, y: 1, z: 0}
   speed: 7
   dmg: 1
   slowBallOn: 0

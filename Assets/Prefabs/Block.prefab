@@ -143,3 +143,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8cd52032b8c3ea942abaa6b6380c778a, type: 3}
   - {fileID: 21300000, guid: ab6172ef1941c754ba987f9da965b33c, type: 3}
   - {fileID: 21300000, guid: 8798cf632ee52654b80506fa6cb7f303, type: 3}
+  dropNumber: 0

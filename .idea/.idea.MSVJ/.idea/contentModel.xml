@@ -21,6 +21,8 @@
           <e p="FastPower.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="GameOver.cs" t="Include" />
+          <e p="Laser.cs" t="Include" />
+          <e p="Launcher.cs" t="Include" />
           <e p="MagnetPower.cs" t="Include" />
           <e p="MainController.cs" t="Include" />
           <e p="MainMenuController.cs" t="Include" />
