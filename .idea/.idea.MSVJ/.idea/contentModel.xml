@@ -12,6 +12,7 @@
         <e p="Scripts" t="Include">
           <e p="BallBehaviour.cs" t="Include" />
           <e p="BlockBehaviour.cs" t="Include" />
+          <e p="BlockSpawnManager.cs" t="Include" />
           <e p="CannonPower.cs" t="Include" />
           <e p="DamagePower.cs" t="Include" />
           <e p="DeveloperTools.cs" t="Include" />

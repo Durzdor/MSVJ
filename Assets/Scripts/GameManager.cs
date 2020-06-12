@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public bool dontDestroyOnLoad;
     public static GameManager Instance;
-    public static float score;
+    public float score;
     [SerializeField] private static int baseScore = 100;
     public GameObject playerObject;
     private MainController playerMainController;
@@ -25,9 +25,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int maxLives;
     public List<BallBehaviour> ballList = new List<BallBehaviour>();
     public List<BlockBehaviour> blockList = new List<BlockBehaviour>();
-    [SerializeField] private int blockHeight;
-    [SerializeField] private int blockWidth;
-    [SerializeField] private Vector3 blockSpawnPosition;
     public List<Drops> dropList = new List<Drops>();
     private int blockCount;
     private bool notDone = true;
@@ -36,6 +33,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private GameObject gameOverPopup;
     [SerializeField] private GameObject winPopup;
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private string currentLevel;
 
     private void Awake()
     {
@@ -55,12 +54,12 @@ public class GameManager : MonoBehaviour
         }
 
         currentLives = maxLives;
-        BlockSpawner();
         ballBehaviour.speed = defaultBallSpeed;
         ScoreBonus(0);
         livesText.text = $"Lives: {currentLives}";
         gameOverPopup.SetActive(false);
         winPopup.SetActive(false);
+        LevelName();
     }
 
     private void Start()
@@ -189,7 +188,6 @@ public class GameManager : MonoBehaviour
         playerMainController.MagnetPlayerReset(buffDuration);
     }
 
-
     //Ball respawner
     public void BallRespawner()
     {
@@ -209,18 +207,6 @@ public class GameManager : MonoBehaviour
     public void BallAdd(BallBehaviour ball)
     {
         ballList.Add(ball);
-    }
-
-    //Block spawner
-    private void BlockSpawner()
-    {
-        for (int y = 0; y < blockHeight; ++y)
-        {
-            for (int x = 0; x < blockWidth; ++x)
-            {
-                Instantiate(blockBehaviour, blockSpawnPosition + new Vector3(x, y, 0), Quaternion.identity);
-            }
-        }
     }
 
     //Block add
@@ -243,7 +229,6 @@ public class GameManager : MonoBehaviour
         {
             ball.speed += 2;
         }
-
         ballBehaviour.speed += 2;
         notDone = false;
     }
@@ -287,5 +272,11 @@ public class GameManager : MonoBehaviour
     {
         winPopup.SetActive(true);
         Time.timeScale = 0.0f;
+    }
+    
+    //current level text
+    public void LevelName()
+    {
+        levelText.text = currentLevel;
     }
 }

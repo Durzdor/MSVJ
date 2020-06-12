@@ -58,6 +58,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BallBehaviour.cs" />
      <Compile Include="Assets\Scripts\BlockBehaviour.cs" />
+     <Compile Include="Assets\Scripts\BlockSpawnManager.cs" />
      <Compile Include="Assets\Scripts\CannonPower.cs" />
      <Compile Include="Assets\Scripts\DamagePower.cs" />
      <Compile Include="Assets\Scripts\DeveloperTools.cs" />

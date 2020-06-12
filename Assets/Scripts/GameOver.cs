@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +9,7 @@ public class GameOver : MonoBehaviour
 {
     [SerializeField] private Button tryAgainButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private String currentLevel;
+    [SerializeField] private string currentLevel;
     [SerializeField] private GameObject gameOverPopup;
 
     private void Awake()
@@ -19,12 +18,15 @@ public class GameOver : MonoBehaviour
         exitButton.onClick.AddListener(ExitButtonClicked);
     }
 
+   //Reinicia el nivel actual
     private void TryAgainButtonClicked()
     {
         SceneManager.LoadScene(currentLevel);
         Time.timeScale = 1.0f;
         gameOverPopup.SetActive(false);
     }
+    
+    //Cierra la aplicacion
     private void ExitButtonClicked()
     {
         if (Application.isEditor)
